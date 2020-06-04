@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin name: Bulk SMS & Woocommerce SMS Manager
+ * Plugin name: Woocommerce & Bulk SMS Manager
  * Plugin URI: https://omukiguy.com
  * Description: Send Bulk SMS or Add SMS Notifications to your WooCommerce E-Shop.
  * Author: Laurence Bahiirwa
@@ -8,7 +8,7 @@
  * Version: 0.1.0
  * License: GPL2 or Later.
  * License URL: http://www.gnu.org/licenses/gpl-2.0.txt
- * text-domain: techiepress-sms-manager
+ * text-domain: wbsm-sms-manager
  */
 
 // If this file is access directly, abort!!!
@@ -18,25 +18,33 @@ defined( 'ABSPATH' ) or die( 'Unauthorized Access' );
 define( 'SMS_ACCOUNT_USERNAME', 'Liz' );
 define( 'SMS_ACCOUNT_PASSWORD', 'Odukar' );
 
-if ( ! defined( 'TECHIEPRESS_SMS_FILE' ) ) {
-	define( 'TECHIEPRESS_SMS_FILE', __FILE__ );
+if ( ! defined( 'WBSM_SMS_FILE' ) ) {
+	define( 'WBSM_SMS_FILE', __FILE__ );
 }
-if ( ! defined( 'TECHIEPRESS_SMS_DIR' ) ) {
-	define( 'TECHIEPRESS_SMS_DIR', dirname( __FILE__ ) );
+if ( ! defined( 'WBSM_SMS_DIR' ) ) {
+	define( 'WBSM_SMS_DIR', dirname( __FILE__ ) );
 }
-if ( ! defined( 'TECHIEPRESS_SMS_URL' ) ) {
-	define( 'TECHIEPRESS_SMS_URL', plugin_dir_url( __FILE__ ) );
+if ( ! defined( 'WBSM_SMS_URL' ) ) {
+	define( 'WBSM_SMS_URL', plugin_dir_url( __FILE__ ) );
 }
-if ( ! defined( 'TECHIEPRESS_SMS_BASENAME' ) ) {
-	define( 'TECHIEPRESS_SMS_BASENAME', plugin_basename( __FILE__ ) );
+if ( ! defined( 'WBSM_SMS_BASENAME' ) ) {
+	define( 'WBSM_SMS_BASENAME', plugin_basename( __FILE__ ) );
 }
 
+// Register your Credentials.
+require_once( plugin_dir_path(__FILE__) . 'includes/add-admin-menu.php' );
+
+// No credentials exist, Don't run these files below.
+if ( ! defined( 'SMS_ACCOUNT_USERNAME' ) || ! defined( 'SMS_ACCOUNT_USERNAME' ) ) {
+	return;
+}
 
 // require_once( plugin_dir_path(__FILE__) . 'includes/register-add-roles.php' );
 require_once( plugin_dir_path(__FILE__) . 'includes/register-custom-sms-post.php' );
-require_once( plugin_dir_path(__FILE__) . 'includes/add-admin-menu.php' );
-require_once( plugin_dir_path(__FILE__) . 'includes/sms-database-manager.php' );
 require_once( plugin_dir_path(__FILE__) . 'includes/outgoing-sms.php' );
+require_once( plugin_dir_path(__FILE__) . 'includes/helper-functions.php' );
+require_once( plugin_dir_path(__FILE__) . 'includes/woo-send.php' );
+require_once( plugin_dir_path(__FILE__) . 'includes/sms-database-manager.php' );
 
 /**
  * Run all the needed functions at the plugin activation
@@ -55,43 +63,17 @@ register_activation_hook( __FILE__ , 'activation_initial_functions' );
 register_deactivation_hook( __FILE__ , 'sms_manager_deregister_role' );
 
 
-if ( ! defined( 'SMS_ACCOUNT_USERNAME' ) || ! defined( 'SMS_ACCOUNT_USERNAME' ) ) {
-	return;
-}
-
-add_action( 'woocommerce_order_status_changed', 'send_sms_onchange_order', 20, 4 );
-
-function send_sms_onchange_order( $order_id, $old_status, $new_status, $order ) {
-
-	// Get $order object from order ID
-	$order = wc_get_order( $order_id );
-	
-	if ( $order ) {
-
-		$first_name = $order->get_billing_first_name();
-		$phone      = $order->get_billing_phone();
-		$shop_name  = get_option( 'woocommerce_email_from_name');
-		
-		$message    = 'Thank you ' . $first_name . '. Your order' . ' #' . $order_id . ' '  . 'is' . ' ' . $new_status . '. ' . $shop_name;
-
-		// Arguments:: number to send to, message, optional sender ID
-		sukuma_send_sms_data( $phone, $message, $shop_name );
-
-	}
-
-}
-
 // When Plugins loaded.
-add_action('plugins_loaded', 'wooTECHIEPRESS_init', 0);
+add_action('plugins_loaded', 'woo_wbsm_init', 0);
 
-function wooTECHIEPRESS_init() {
+function woo_wbsm_init() {
 
     if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
 
 		function woocommerce_not_installed_notice() {
 			$message = sprintf(
 				/* translators: URL of WooCommerce plugin */
-				__( 'TECHIEPRESS SMS Notifications for WooCommerce plugin requires <a href="%s">WooCommerce</a> 3.0 or greater to be installed and active.', 'TECHIEPRESS-sms-notifications-for-woo' ),
+				__( 'WBSM SMS Notifications for WooCommerce plugin requires <a href="%s">WooCommerce</a> 3.0 or greater to be installed and active.', 'WBSM-sms-notifications-for-woo' ),
 				'https://wordpress.org/plugins/woocommerce/'
 			);
 		
@@ -103,6 +85,6 @@ function wooTECHIEPRESS_init() {
 		return;
 	}
 
-	require_once TECHIEPRESS_SMS_DIR . '/includes/woocommerce/sms-admin.php';
+	require_once WBSM_SMS_DIR . '/includes/woocommerce/sms-admin.php';
 	
 }
