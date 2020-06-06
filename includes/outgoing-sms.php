@@ -9,11 +9,15 @@ function sukuma_send_sms_data( string $send_to_sms_number = 'NULL', string $send
 		return;
 	}
 
+	$options = get_option( 'wbsm_notifications_settings' );
+	$user_name = $options['wbsm_user_password'];
+	$user_password = $options['wbsm_user_password'];
+
 	$msgdata = array(
 		'method' => 'SendSms',
 		'userdata' => array(
-			'username' => SMS_ACCOUNT_USERNAME,
-			'password' => SMS_ACCOUNT_PASSWORD,
+			'username' => $user_name,
+			'password' => $user_password,
 		),
 		'msgdata' => array(
 			array(

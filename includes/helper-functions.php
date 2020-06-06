@@ -8,14 +8,14 @@
  */
 function get_account_balance() {
 
-	$sms_balance = 0;
+	// $sms_balance = 0;
 	$tpress_account_balance = get_option( 'tpress_account_balance' );
 
     $args = array(
         'method' => 'Balance',
         'userdata' => array(
-            'username' => SMS_ACCOUNT_USERNAME,
-            'password' => SMS_ACCOUNT_PASSWORD,
+            'username' => WBSM_USERNAME,
+            'password' => WBSM_PASSWORD,
         )
     );
 
@@ -42,16 +42,16 @@ function get_account_balance() {
 	
 	$balance = json_decode( wp_remote_retrieve_body($response) );
 
-	if ( 'OK' !== $balance->Status && $balance->Message ) {
-		echo '<p>Message: ' . $balance->Message . '<p>';
-		echo '<p>Balance: ' . $tpress_account_balance . '<p>';
+	if ( 'Failed' === $balance->Status && $balance->Message ) {
+		echo '<p>Message: ' . $balance->Message . ' Kindly check your account settings.<p>';
+		return;
 	}
 
 	if ( 'OK' === $balance->Status ) {
 		$sms_balance = number_format( $balance->Balance, 0 );
 	}
 	
-	if( $balance->Balance === $tpress_account_balance ) {
+	if( $sms_balance === $tpress_account_balance ) {
 		return;
 	}
 	

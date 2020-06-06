@@ -14,10 +14,6 @@
 // If this file is access directly, abort!!!
 defined( 'ABSPATH' ) or die( 'Unauthorized Access' );
 
-// Please add your account details.
-define( 'SMS_ACCOUNT_USERNAME', 'Liz' );
-define( 'SMS_ACCOUNT_PASSWORD', 'Odukar' );
-
 if ( ! defined( 'WBSM_SMS_FILE' ) ) {
 	define( 'WBSM_SMS_FILE', __FILE__ );
 }
@@ -34,10 +30,17 @@ if ( ! defined( 'WBSM_SMS_BASENAME' ) ) {
 // Register your Credentials.
 require_once( plugin_dir_path(__FILE__) . 'includes/add-admin-menu.php' );
 
+$options = get_option( 'wbsm_notifications_settings' );
+$user_name = $options['wbsm_user_name'];
+$user_password = $options['wbsm_user_password'];
+
 // No credentials exist, Don't run these files below.
-if ( ! defined( 'SMS_ACCOUNT_USERNAME' ) || ! defined( 'SMS_ACCOUNT_USERNAME' ) ) {
+if ( '' === $user_name || '' === $user_password || empty( $user_name ) || empty( $user_password ) ) {
 	return;
 }
+
+define( 'WBSM_USERNAME', $user_name );
+define( 'WBSM_PASSWORD', $user_password );
 
 // require_once( plugin_dir_path(__FILE__) . 'includes/register-add-roles.php' );
 require_once( plugin_dir_path(__FILE__) . 'includes/register-custom-sms-post.php' );

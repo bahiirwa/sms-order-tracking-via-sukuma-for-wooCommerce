@@ -12,12 +12,12 @@ class Cashleo_WC_SMS_Admin {
 		add_filter( 'woocommerce_settings_tabs_array', array( $this, 'add_settings_tab' ), 100 );
 		add_action( 'woocommerce_settings_tabs_cashleo_sms', array( $this, 'cashleo_sms_settings_tab' ) );
 		add_action( 'woocommerce_update_options_cashleo_sms', array( $this, 'update_cashleo_sms_settings' ) );
-		add_action( 'woocommerce_admin_field_wc_cashleo_sms_link', array( $this, 'add_link_field' ) );
-		add_action( 'add_meta_boxes', array( $this, 'add_send_sms_meta_box' ) );
-		add_action( 'wp_ajax_wc_cashleo_sms_send_test_sms', array( $this, 'send_test_sms' ) );
-		add_action( 'wp_ajax_wc_cashleo_sms_send_order_sms', array( $this, 'send_order_sms' ) );
-		add_action( 'admin_bar_menu', array( $this, 'show_cashleo_sms_credits' ), 100, 1 );
-		add_filter( 'plugin_action_links_' . CASHLEO_WC_SMS_BASENAME, array( $this, 'plugin_action_links' ) );
+		// add_action( 'woocommerce_admin_field_wc_cashleo_sms_link', array( $this, 'add_link_field' ) );
+		// add_action( 'add_meta_boxes', array( $this, 'add_send_sms_meta_box' ) );
+		// add_action( 'wp_ajax_wc_cashleo_sms_send_test_sms', array( $this, 'send_test_sms' ) );
+		// add_action( 'wp_ajax_wc_cashleo_sms_send_order_sms', array( $this, 'send_order_sms' ) );
+		// add_action( 'admin_bar_menu', array( $this, 'show_cashleo_sms_credits' ), 100, 1 );
+		// add_filter( 'plugin_action_links_' . WBSM_SMS_BASENAME, array( $this, 'plugin_action_links' ) );
 	}
 
 	/**
@@ -115,7 +115,7 @@ class Cashleo_WC_SMS_Admin {
 			array(
 				'title' => 'SMS Account Balance',
 				'type'  => 'title',
-                'desc'  => 'Balance: <span style="background-color: green; padding: 0 8px; color: white;">' . number_format( get_option( 'tpress_account_balance' ), 0 ) . '</span> To Purchase more SMS credit, send mm to 0782886702 with your account name to top up your credit.</a>',
+                'desc'  => 'Balance: <span style="background-color: green; padding: 0 8px; color: white;">UGX ' . number_format( intval( get_option( 'tpress_account_balance' ) ), 0 ) . '</span> To Purchase more SMS credit, send mm to 0782886702 with your account name to top up your credit.</a>',
 			),
             
             array( 'type' => 'sectionend' ),
@@ -472,135 +472,135 @@ class Cashleo_WC_SMS_Admin {
 	/**
 	 * Send test message
 	 */
-	public function send_test_sms() {
+	// public function send_test_sms() {
 
-		if ( ! is_admin() || ! current_user_can( 'edit_posts' ) ) {
-			wp_die( 'You do not have sufficient permissions to access this page.' );
-		}
+	// 	if ( ! is_admin() || ! current_user_can( 'edit_posts' ) ) {
+	// 		wp_die( 'You do not have sufficient permissions to access this page.' );
+	// 	}
 
-		if ( ! wp_verify_nonce( $_POST['security'], 'wc_cashleo_sms_send_test_sms' ) ) {
-			wp_die( 'You have taken too long, please go back and try again.' );
-		}
+	// 	if ( ! wp_verify_nonce( $_POST['security'], 'wc_cashleo_sms_send_test_sms' ) ) {
+	// 		wp_die( 'You have taken too long, please go back and try again.' );
+	// 	}
 
-		$message = sanitize_textarea_field( $_POST['message'] );
-		$phone   = sanitize_text_field( $_POST['mobile_number'] );
+	// 	$message = sanitize_textarea_field( $_POST['message'] );
+	// 	$phone   = sanitize_text_field( $_POST['mobile_number'] );
 
-		$cashleo_wc_sms = new cashleo_WC_SMS();
+	// 	$cashleo_wc_sms = new cashleo_WC_SMS();
 
-		$send_sms = $cashleo_wc_sms->send_sms( $phone, $message );
+	// 	$send_sms = $cashleo_wc_sms->send_sms( $phone, $message );
 
-		if ( isset( $send_sms->status ) && ( 'Sent' === $send_sms->status ) ) {
-			exit( 'Message Sent' );
-		} else {
-			exit( 'Message Not Sent ' );
-		}
-	}
+	// 	if ( isset( $send_sms->status ) && ( 'Sent' === $send_sms->status ) ) {
+	// 		exit( 'Message Sent' );
+	// 	} else {
+	// 		exit( 'Message Not Sent ' );
+	// 	}
+	// }
 
 	/**
 	 * Send message from the order details page.
 	 */
-	public function send_order_sms() {
+	// public function send_order_sms() {
 
-		if ( ! is_admin() || ! current_user_can( 'edit_posts' ) ) {
-			wp_die( 'You do not have sufficient permissions to access this page.' );
-		}
+	// 	if ( ! is_admin() || ! current_user_can( 'edit_posts' ) ) {
+	// 		wp_die( 'You do not have sufficient permissions to access this page.' );
+	// 	}
 
-		if ( ! wp_verify_nonce( $_POST['security'], 'wc_cashleo_sms_send_order_sms' ) ) {
-			wp_die( 'You have taken too long, please go back and try again.' );
-		}
+	// 	if ( ! wp_verify_nonce( $_POST['security'], 'wc_cashleo_sms_send_order_sms' ) ) {
+	// 		wp_die( 'You have taken too long, please go back and try again.' );
+	// 	}
 
-		$message = sanitize_textarea_field( $_POST['message'] );
+	// 	$message = sanitize_textarea_field( $_POST['message'] );
 
-		$order_id = ( is_numeric( $_POST['order_id'] ) ) ? absint( $_POST['order_id'] ) : null;
+	// 	$order_id = ( is_numeric( $_POST['order_id'] ) ) ? absint( $_POST['order_id'] ) : null;
 
-		if ( ! $order_id ) {
-			return;
-		}
+	// 	if ( ! $order_id ) {
+	// 		return;
+	// 	}
 
-		$order = wc_get_order( $order_id );
+	// 	$order = wc_get_order( $order_id );
 
-		$phone = method_exists( $order, 'get_billing_phone' ) ? $order->get_billing_phone() : $order->billing_phone;
+	// 	$phone = method_exists( $order, 'get_billing_phone' ) ? $order->get_billing_phone() : $order->billing_phone;
 
-		$cashleo_wc_sms = new cashleo_WC_SMS();
+	// 	$cashleo_wc_sms = new cashleo_WC_SMS();
 
-		$message = $cashleo_wc_sms->replace_message_variables( $message, $order_id );
+	// 	$message = $cashleo_wc_sms->replace_message_variables( $message, $order_id );
 
-		$send_sms = $cashleo_wc_sms->send_sms( $phone, $message, true, $order_id );
+	// 	$send_sms = $cashleo_wc_sms->send_sms( $phone, $message, true, $order_id );
 
-		if ( isset( $send_sms->status ) && ( 'Sent' === $send_sms->status ) ) {
-			exit( 'Message Sent' );
-		} else {
-			exit( 'Message Not Sent ' );
-		}
-	}
+	// 	if ( isset( $send_sms->status ) && ( 'Sent' === $send_sms->status ) ) {
+	// 		exit( 'Message Sent' );
+	// 	} else {
+	// 		exit( 'Message Not Sent ' );
+	// 	}
+	// }
 
 	/**
 	 * Display Cashleo credits balance in the admin bar.
 	 *
 	 * @param $wp_admin_bar
 	 */
-	public function show_cashleo_sms_credits( $wp_admin_bar ) {
+	// public function show_cashleo_sms_credits( $wp_admin_bar ) {
 
-		if ( ! is_admin_bar_showing() || ! current_user_can( 'manage_woocommerce' ) ) {
-			return;
-		}
+	// 	if ( ! is_admin_bar_showing() || ! current_user_can( 'manage_woocommerce' ) ) {
+	// 		return;
+	// 	}
 
-		if ( false === ( $my_query = get_transient( 'cashleo_available_sms_credits' ) ) ) {
+	// 	if ( false === ( $my_query = get_transient( 'cashleo_available_sms_credits' ) ) ) {
 
-			$sms_username = get_option( 'wc_cashleo_sms_username', true );
-			$sms_password = get_option( 'wc_cashleo_sms_password', true );
+	// 		$sms_username = get_option( 'wc_cashleo_sms_username', true );
+	// 		$sms_password = get_option( 'wc_cashleo_sms_password', true );
 
-			if ( empty( $sms_username ) || empty( $sms_password ) ) {
-				return;
-			}
+	// 		if ( empty( $sms_username ) || empty( $sms_password ) ) {
+	// 			return;
+	// 		}
 
-			$args = array(
-				'timeout' => 15,
-			);
+	// 		$args = array(
+	// 			'timeout' => 15,
+	// 		);
 
-			$url = 'https://sms.sukumasms.com/api/v1/plain/?method=Balance&username=' . $sms_username . '&password=' . $sms_password;
+	// 		$url = 'https://sms.sukumasms.com/api/v1/plain/?method=Balance&username=' . $sms_username . '&password=' . $sms_password;
 
-			$response = wp_remote_get( $url, $args );
+	// 		$response = wp_remote_get( $url, $args );
 
-			if ( ! is_wp_error( $response ) && 200 === (int) wp_remote_retrieve_response_code( $response ) ) {
-				$body = json_decode( wp_remote_retrieve_body( $response ) );
+	// 		if ( ! is_wp_error( $response ) && 200 === (int) wp_remote_retrieve_response_code( $response ) ) {
+	// 			$body = json_decode( wp_remote_retrieve_body( $response ) );
 
-				set_transient( 'cashleo_available_sms_credits', $body->sms_credits, 1 * HOUR_IN_SECONDS );
-			}
-		}
+	// 			set_transient( 'cashleo_available_sms_credits', $body->sms_credits, 1 * HOUR_IN_SECONDS );
+	// 		}
+	// 	}
 
-		$sms_credits = get_transient( 'cashleo_available_sms_credits' );
+	// 	$sms_credits = get_transient( 'cashleo_available_sms_credits' );
 
-		if ( $sms_credits ) {
+	// 	if ( $sms_credits ) {
 
-			$message = 'You have ' . $sms_credits . ' SMS credits left';
+	// 		$message = 'You have ' . $sms_credits . ' SMS credits left';
 
-			$menu_args = array(
-				'id'    => 'wc_cashleo_sms_admin_bar_menu',
-				'title' => 'Cashleo SMS Credits: ' . $sms_credits,
-				'href'  => false,
-			);
+	// 		$menu_args = array(
+	// 			'id'    => 'wc_cashleo_sms_admin_bar_menu',
+	// 			'title' => 'Cashleo SMS Credits: ' . $sms_credits,
+	// 			'href'  => false,
+	// 		);
 
-			$sms_usage_item_args = array(
-				'id'     => 'wc_cashleo_sms_sms_usage_item',
-				'title'  => $message,
-				'href'   => false,
-				'parent' => 'wc_cashleo_sms_admin_bar_menu',
-			);
+	// 		$sms_usage_item_args = array(
+	// 			'id'     => 'wc_cashleo_sms_sms_usage_item',
+	// 			'title'  => $message,
+	// 			'href'   => false,
+	// 			'parent' => 'wc_cashleo_sms_admin_bar_menu',
+	// 		);
 
-			$add_funds_item_args = array(
-				'id'     => 'wc_cashleo_sms_add_funds_item',
-				'title'  => 'Buy SMS Credits for Your Cashleo Account',
-				'href'   => 'https://dashboard.Cashleo.com/buy-credit',
-				'meta'   => array( 'target' => '_blank' ),
-				'parent' => 'wc_cashleo_sms_admin_bar_menu',
-			);
+	// 		$add_funds_item_args = array(
+	// 			'id'     => 'wc_cashleo_sms_add_funds_item',
+	// 			'title'  => 'Buy SMS Credits for Your Cashleo Account',
+	// 			'href'   => 'https://dashboard.Cashleo.com/buy-credit',
+	// 			'meta'   => array( 'target' => '_blank' ),
+	// 			'parent' => 'wc_cashleo_sms_admin_bar_menu',
+	// 		);
 
-			$wp_admin_bar->add_menu( $menu_args );
-			$wp_admin_bar->add_menu( $sms_usage_item_args );
-			$wp_admin_bar->add_menu( $add_funds_item_args );
-		}
-	}
+	// 		$wp_admin_bar->add_menu( $menu_args );
+	// 		$wp_admin_bar->add_menu( $sms_usage_item_args );
+	// 		$wp_admin_bar->add_menu( $add_funds_item_args );
+	// 	}
+	// }
 
 	/**
 	 * Plugin action links.
