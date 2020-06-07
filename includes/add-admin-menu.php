@@ -7,13 +7,13 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 }
 
 function techiepress_register_woo_admin_menu() {
-	add_submenu_page( 
+	add_submenu_page(
 		'woocommerce', 
 		__( 'SMS Plugin Settings', 'textdomain' ),
 		'Bulk SMS Settings', 
 		'manage_options', 
 		'wc-settings&tab=cashleo_sms',
-		'sukuma_admin_stuff',
+		'sukuma_admin_stuff'
 	); 
 }
 
@@ -59,6 +59,7 @@ function wbsm_theme_display() {
 	
 		<div id="icon-themes" class="icon32"></div>
 		<h2><?php _e( 'Bulk & WooCommerce SMS Notifications.', 'wbsm-sms-manager' ); ?></h2>
+		
 		<?php settings_errors(); ?>
 		
 		<form method="post" action="options.php">
@@ -67,6 +68,11 @@ function wbsm_theme_display() {
 				if ( function_exists( 'sukuma_admin_stuff' ) ) {
 					sukuma_admin_stuff();
 				}
+				echo '<p>To Purchase more SMS credit, send mm to 0782886702 with your account name to top up your credit.</p>';
+				
+				echo '<p>This section lets you enter your SMS Account Credentials. Use your login credentials for your <a href="https://sms.sukumasms.com" target="_blank">SMS account here.</a> If you don\'t an account visit <a href="https://sms.sukumasms.com/register.php"  target="_blank">Sukuma SMS to register.</a></p>';
+
+				echo '<hr>';		
 
 				settings_fields( 'wbsm_notifications_settings' );
 				do_settings_sections( 'wbsm_notifications_settings' );
@@ -87,13 +93,13 @@ function wbsm_theme_display() {
 function wbsm_theme_default_input_options() {
 	
 	$defaults = array(
-		'wbsm_user_name'     =>	'',
-		'wbsm_user_password' =>	'',
-		'wbsm_admin_phone'	 =>	'',
-		'wbsm_sender_id'	 =>	'',
-		'bulk_sms_usage'	 =>	'',
-		'woo_order_status_sms'	 =>	'',
-		'woo_order_notes_sms'	 =>	'',
+		'wbsm_user_name'        => '',
+		'wbsm_user_password'    => '',
+		'wbsm_admin_phone'	    => '',
+		'wbsm_sender_id'        => '',
+		'bulk_sms_usage'	    => '',
+		'woo_order_status_sms'	=> '',
+		'woo_order_notes_sms'	=> '',
 	);
 	
 	return apply_filters( 'wbsm_theme_default_input_options', $defaults );
@@ -205,7 +211,7 @@ function wbsm_user_name_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 	
 	$wbsm_user_name = ! empty( $options['wbsm_user_name'] ) ? $options['wbsm_user_name'] : '';
-	echo '<input type="text" id="wbsm_user_name" name="wbsm_notifications_settings[wbsm_user_name]" value="' . $wbsm_user_name . '" /><p class="description">Add your SukumaSMS Account Username.</p>';
+	echo '<input type="text" id="wbsm_user_name" name="wbsm_notifications_settings[wbsm_user_name]" value="' . $wbsm_user_name . '" /><span class="description">Add your SukumaSMS Account Username.</span>';
 	
 } // end wbsm_user_name_callback
 
@@ -214,7 +220,7 @@ function wbsm_user_password_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 
 	$wbsm_user_password = ! empty( $options['wbsm_user_password'] ) ? $options['wbsm_user_password'] : '';
-	echo '<input type="text" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><p class="description">Add your SukumaSMS Account Password.</p>';
+	echo '<input type="text" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description">Add your SukumaSMS Account Password.</span>';
 	
 } // end wbsm_user_password_callback
 
@@ -223,7 +229,7 @@ function wbsm_admin_phone_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 	
 	$phone = ! empty( $options['wbsm_admin_phone'] ) ? $options['wbsm_admin_phone'] : '';
-	echo '<input type="text" id="wbsm_admin_phone" name="wbsm_notifications_settings[wbsm_admin_phone]" value="' . $phone . '" /><p class="description">Add your Administrative SMS Number.</p>';
+	echo '<input type="text" id="wbsm_admin_phone" name="wbsm_notifications_settings[wbsm_admin_phone]" value="' . $phone . '" /><span class="description">Add your Administrative SMS Number.</span>';
 	
 } // end wbsm_admin_phone_callback
 
@@ -233,7 +239,7 @@ function wbsm_sender_id_callback() {
 	$blogname = get_option( 'blogname' );
 	
 	$wbsm_sender_id = ! empty( $options['wbsm_sender_id'] ) ? $options['wbsm_sender_id'] : $blogname;
-	echo '<input type="text" id="wbsm_sender_id" name="wbsm_notifications_settings[wbsm_sender_id]" value="' . $wbsm_sender_id . '" /><p class="description">Add your default sender ID. This can be your Business Name or anything else.</p><hr>';
+	echo '<input type="text" id="wbsm_sender_id" name="wbsm_notifications_settings[wbsm_sender_id]" value="' . $wbsm_sender_id . '" /><span class="description">Add your default sender ID. This can be your Business Name or anything else.</span>';
 	
 } // end wbsm_sender_id_callback
 
@@ -253,15 +259,15 @@ function wbsm_bulk_sms_usage_callback() {
 function wbsm_woo_order_status_sms_callback() {
 
 	$options = get_option( 'wbsm_notifications_settings' );
-	
+
 	$woo_order_status_sms = ! empty( $options['woo_order_status_sms'] ) ? $options['woo_order_status_sms'] : '';
 	$html = '<input type="checkbox" id="woo_order_status_sms" name="wbsm_notifications_settings[woo_order_status_sms]" value="1"' . checked( 1, $woo_order_status_sms, false ) . '/>';
 	$html .= '&nbsp;';
-	$html .= '<label for="woo_order_status_sms">Turn on WooCommerce Order Status Change SMS Usage</label>';
+	$html .= '<label for="woo_order_status_sms">Turn on WooCommerce Order Notes Change SMS Usage</label>';
 	
 	echo $html;
 
-} // end wbsm_woo_order_status_sms_callback
+} // end wbsm_woo_order_notes_sms_callback
 
 function wbsm_woo_order_notes_sms_callback() {
 

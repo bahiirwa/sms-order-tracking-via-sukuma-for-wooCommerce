@@ -2,7 +2,10 @@
 /**
  * Send SMS on change of Order Status.
  */
-add_action( 'woocommerce_order_status_changed', 'send_sms_onchange_order', 20, 4 );
+
+// var_dump(get_option( 'wc_cashleo_order_pending'));
+
+add_action( 'woocommerce_order_status_changed', 'send_sms_onchange_order', 10, 4 );
 
 function send_sms_onchange_order( $order_id, $old_status, $new_status, $order ) {
 
@@ -12,7 +15,7 @@ function send_sms_onchange_order( $order_id, $old_status, $new_status, $order ) 
 	if ( $order ) {
 
 		$first_name = $order->get_billing_first_name();
-		$phone      = $order->get_billing_phone();
+		$phone      = qualify_phone_number( $order->get_billing_phone() );
         $shop_name  = get_option( 'woocommerce_email_from_name');
         
 		$message    = 'Thank you ' . $first_name . '. Your order' . ' #' . $order_id . ' '  . 'is' . ' ' . $new_status . '. ' . $shop_name;
