@@ -121,6 +121,7 @@ function get_account_balance() {
 
 	if ( 'Failed' === $balance->Status && $balance->Message ) {
 		echo '<p>Message: ' . $balance->Message . ' Kindly check your account settings.<p>';
+		update_option( 'tpress_account_balance' , '0' );
 		return;
 	}
 
