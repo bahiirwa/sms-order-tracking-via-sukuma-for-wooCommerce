@@ -35,6 +35,8 @@ $options              = get_option( 'wbsm_notifications_settings' );
 
 $user_name            = ( isset( $options['wbsm_user_name'] ) ) ? $options['wbsm_user_name'] : '';
 $user_password        = ( isset( $options['wbsm_user_password'] ) ) ? $options['wbsm_user_password'] : '0';
+$admin_phone          = ( isset( $options['wbsm_admin_phone'] ) ) ? $options['wbsm_admin_phone'] : '';
+$sender_id            = ( isset( $options['wbsm_sender_id'] ) ) ? $options['wbsm_sender_id'] : get_bloginfo('name');
 $woo_order_status_sms = ( isset( $options['woo_order_status_sms'] ) ) ? $options['woo_order_status_sms'] : '0';
 $woo_order_notes_sms  = ( isset( $options['woo_order_notes_sms'] ) ) ? $options['woo_order_notes_sms'] : '0';
 
@@ -45,6 +47,8 @@ if ( '' === $user_name || '' === $user_password || empty( $user_name ) || empty(
 
 define( 'WBSM_USERNAME', $user_name );
 define( 'WBSM_PASSWORD', $user_password );
+define( 'WBSM_ADMIN_PHONE', $admin_phone );
+define( 'WBSM_SENDER_ID', $sender_id );
 define( 'WBSM_WOO_NOTIFICATIONS', $woo_order_status_sms );
 define( 'WBSM_WOO_NOTES_SMS', $woo_order_status_sms );
 

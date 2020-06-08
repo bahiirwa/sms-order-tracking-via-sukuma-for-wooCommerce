@@ -220,7 +220,7 @@ function wbsm_user_password_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 
 	$wbsm_user_password = ! empty( $options['wbsm_user_password'] ) ? $options['wbsm_user_password'] : '';
-	echo '<input type="text" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description">Add your SukumaSMS Account Password.</span>';
+	echo '<input type="password" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description">Add your SukumaSMS Account Password.</span>';
 	
 } // end wbsm_user_password_callback
 
