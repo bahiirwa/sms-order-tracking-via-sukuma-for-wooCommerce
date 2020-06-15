@@ -2,10 +2,7 @@
 /**
  * Send SMS on change of Order Status.
  *
- * @category Plugin
  * @package  woosmsordertracking
- * @author   Laurence Bahiirwa
- * @license  GPL2 or Later
  */
 
 // When order sending turned on.
@@ -34,17 +31,43 @@ function send_sms_onchange_order( $order_id, $old_status, $new_status, $order ) 
 	$order = wc_get_order( $order_id );
 
 	if ( $order ) {
-		$first_name = $order->get_billing_first_name();
-		$phone      = qualify_phone_number( $order->get_billing_phone() );
-		$shop_name  = get_option( 'woocommerce_email_from_name' );
-		$message    = "Thank you {$first_name} . Your order # {$order_id} is {$new_status}. {$shop_name}";
-		$status     = $order->get_status();
+
+		// Get order status.
+		$status       = $order->get_status();
+		$order_status = ucfirst( $status );
 
 		/**
 		 * If the order status is activated, then send the SMS.
 		 * sukuma_send_sms_data() Arguments:: number to send to, message, optional sender ID.
 		 */
-		if ( 'yes' === get_option( 'wc_cashleo_order_' . $status ) ) {
+		if ( 'yes' === get_option( 'wc_wsmsmot_order_' . $status ) ) {
+
+			$first_name = $order->get_billing_first_name();
+			$phone      = qualify_phone_number( $order->get_billing_phone() );
+			$shop_name  = get_option( 'woocommerce_email_from_name' );
+
+			// Default Message.
+			$default_message = get_option( 'wc_wsmsmot_default_sms_' . str_replace( '-', '_', $status ) );
+
+			if ( ! isset( $default_message ) ) {
+				$message = "Thank you {$first_name} . Your order # {$order_id} is {$new_status}. {$shop_name}";
+			}
+
+			// Replacements variables in the default messages.
+			$replacements = array(
+				'%first_name%'     => $first_name,
+				'%last_name%'      => $order->get_billing_last_name(),
+				'%phone_number%'   => $phone,
+				'%shop_url%'       => get_home_url(),
+				'%shop_name%'      => $shop_name,
+				'%order_id%'       => $order_id,
+				'%order_amount%'   => number_format( $order->get_total() ),
+				'%order_status%'   => $order_status,
+				'%store_currency%' => $order->get_data()['currency'],
+			);
+
+			$message = str_replace( array_keys( $replacements ), $replacements, $default_message );
+
 			sukuma_send_sms_data( $phone, $message, $shop_name );
 		}
 	}
