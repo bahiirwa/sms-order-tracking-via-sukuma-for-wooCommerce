@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin name: Woocommerce SMS Order Tracking
+ * Plugin name: Sukuma Woocommerce SMS Order Tracking
  * Plugin URI: https://omukiguy.com
  * Description: Send SMS Notifications to your customers when order status changes or when you make a new order note in your WooCommerce E-Shop.
  * Author: Laurence Bahiirwa
