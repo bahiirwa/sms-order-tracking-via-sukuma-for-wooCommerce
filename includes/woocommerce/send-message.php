@@ -70,3 +70,22 @@ function send_sms_on_new_order_note( $email_args ) {
 		sukuma_send_sms_data( $phone, $message, $shop_name );
 	}
 }
+add_action( 'woocommerce_new_customer_note_notification', 'send_sms_on_new_order_note', 10);
+
+function send_sms_on_new_order_note($email_args){
+	$order = wc_get_order( $email_args['order_id'] );
+	$customer_note = $email_args['customer_note'];
+	
+	if ( $order ) {
+
+		$first_name = $order->get_billing_first_name();
+		$phone      = qualify_phone_number( $order->get_billing_phone() );
+		$shop_name  = get_option( 'woocommerce_email_from_name');
+		
+		$message    = $email_args['customer_note'];
+
+		// Arguments:: number to send to, message, optional sender ID
+		sukuma_send_sms_data( $phone, $message, $shop_name );
+
+	}
+}

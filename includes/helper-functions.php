@@ -68,11 +68,11 @@ function store_inside_sms_cpt( $data_to_send_api, $response, $status ) {
 	'post_type'     => 'sms',
 	'post_status'   => 'publish',
 	'meta_input'    => array(
-		'sender_id_field_meta_key'  => $data_to_send_api['msgdata'][0]['senderid'],
-		'sender_numbers_field_meta_key'  => $data_to_send_api['msgdata'][0]['number'],
-		'sender_msg_field_meta_key'  => $data_to_send_api['msgdata'][0]['message'],
-		'sms_sent_status_meta_key'  => $results->Status . (isset($results->Message) ?  ' - ' . $results->Message : ''),
-		'sms_cost_meta_key'  => $cost,
+    'sender_id_field_meta_key'      => $data_to_send_api['msgdata'][0]['senderid'],
+    'sender_numbers_field_meta_key' => $data_to_send_api['msgdata'][0]['number'],
+    'sender_msg_field_meta_key'     => $data_to_send_api['msgdata'][0]['message'],
+    'sms_sent_status_meta_key'      => $results->Status . (isset($results->Message) ?  ' - ' . $results->Message : ''),
+    'sms_cost_meta_key'             => $cost,
 	),
   );
    
