@@ -10,7 +10,7 @@ function techiepress_register_woo_admin_menu() {
 	add_submenu_page(
 		'woocommerce', 
 		__( 'SMS Plugin Settings', 'textdomain' ),
-		'Woo SMS Settings', 
+		'Order SMS Tracking Settings', 
 		'manage_options', 
 		'wc-settings&tab=cashleo_sms',
 		'sukuma_admin_stuff'
@@ -298,11 +298,9 @@ function wbsm_theme_validate_inputs( $input ) {
 		
 		// Check to see if the current option has a value. If so, process it.
 		if( isset( $input[$key] ) ) {
-		
 			// Strip all HTML and PHP tags and properly handle quoted strings
-			$output[$key] = strip_tags( stripslashes( $input[ $key ] ) );
-			
-		} // end if
+			$output[$key] = wp_strip_all_tags( stripslashes( $input[ $key ] ) );
+		}
 		
 	} // end foreach
 	
