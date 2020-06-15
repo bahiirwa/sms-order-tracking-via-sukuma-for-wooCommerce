@@ -5,7 +5,7 @@
  * Description: Send SMS Notifications to your customers when order status changes or when you make a new order note in your WooCommerce E-Shop.
  * Author: Laurence Bahiirwa
  * Author URI: https://omukiguy.com
- * Version: 0.2.0
+ * Version: 1.0.0
  * License: GPL2 or Later.
  * License URL: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text-domain: woo-sms-order-tracking

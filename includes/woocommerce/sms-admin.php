@@ -1,7 +1,12 @@
 <?php
 /**
- * Class WSMSOT_WC_SMS_Admin
  * Set up the needed variables and logins on admin side.
+ */
+
+/**
+ * Class WSMSOT_WC_SMS_Admin
+ * 
+ * @package Woosmsordertracking
  */
 class WSMSOT_WC_SMS_Admin {
 
