@@ -2,7 +2,7 @@
 /**
  * Register a custom menu page
  */
-if ( ! class_exists( 'WooCommerce' ) ) {
+if ( class_exists( 'WooCommerce' ) ) {
 	add_action( 'admin_menu', 'techiepress_register_woo_admin_menu' );
 }
 
@@ -10,7 +10,7 @@ function techiepress_register_woo_admin_menu() {
 	add_submenu_page(
 		'woocommerce', 
 		__( 'SMS Plugin Settings', 'textdomain' ),
-		'Bulk SMS Settings', 
+		'Woo SMS Settings', 
 		'manage_options', 
 		'wc-settings&tab=cashleo_sms',
 		'sukuma_admin_stuff'
@@ -37,11 +37,13 @@ function sukuma_admin_stuff() {
 function wbsm_general_admin_menu() {
 
 	add_menu_page(
-		'Bulk SMS',			 // The value used to populate the browser's title bar when the menu page is active
-		'Bulk SMS',		     // The text of the menu in the administrator's sidebar
-		'administrator',	 // What roles are able to access the menu
-		'wbsm_theme_menu',	 // The ID used to bind submenu items to this menu 
-		'wbsm_theme_display' // The callback function used to render this menu
+		'Woo Order SMS Tracking',
+		'Order SMS',
+		'manage_options',
+		'wbsm_theme_menu',
+		'wbsm_theme_display',
+		'dashicons-location-alt',
+		16
 	);
 
 } 
@@ -220,7 +222,8 @@ function wbsm_user_password_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 
 	$wbsm_user_password = ! empty( $options['wbsm_user_password'] ) ? $options['wbsm_user_password'] : '';
-	echo '<input type="password" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your SukumaSMS Account Password.</span>';
+	echo '<input type="password" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your SukumaSMS Account Password.</span>
+	<p style="margin-top:10px;"><input type="checkbox" onclick="wbsm_password_toggle()">Show Password</p>';
 	
 } // end wbsm_user_password_callback
 
@@ -307,3 +310,21 @@ function wbsm_theme_validate_inputs( $input ) {
 	return apply_filters( 'wbsm_theme_validate_inputs', $output, $input );
 
 } // end wbsm_theme_validate_inputs
+
+
+add_action( 'admin_footer', 'wbsm_toggle_password' );
+
+function wbsm_toggle_password() {
+	?>
+	<script>
+		function wbsm_password_toggle() {
+			var password_box = document.getElementById("wbsm_user_password");
+			if (password_box.type === "password") {
+				password_box.type = "text";
+			} else {
+				password_box.type = "password";
+			}
+		}
+	</script>
+	<?php
+}
