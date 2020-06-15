@@ -2,7 +2,7 @@
 /**
  * Set up Messages post type for the Feedback.
  *
- * @package Woosmsordertracking.
+ * @package SukumaWooTracking.
  */
 
 /**

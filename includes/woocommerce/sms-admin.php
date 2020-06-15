@@ -6,7 +6,7 @@
 /**
  * Class WSMSOT_WC_SMS_Admin
  * 
- * @package Woosmsordertracking
+ * @package SukumaWooTracking
  */
 class WSMSOT_WC_SMS_Admin {
 

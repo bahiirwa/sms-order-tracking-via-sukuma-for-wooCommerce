@@ -10,7 +10,7 @@
  * License URL: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text-domain: woo-sms-order-tracking
  *
- * @package Woosmsordertracking
+ * @package SukumaWooTracking
  */
 
 // If this file is access directly, abort!!!

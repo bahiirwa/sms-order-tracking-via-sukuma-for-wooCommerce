@@ -2,7 +2,7 @@
 /**
  * Add new user role for SMS Manager.
  *
- * @package Woosmsordertracking
+ * @package SukumaWooTracking
  */
 
 /**

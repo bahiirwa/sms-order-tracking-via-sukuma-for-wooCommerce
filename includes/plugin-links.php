@@ -2,7 +2,7 @@
 /**
  * Add plugin action links.
  *
- * @package Woosmsordertracking
+ * @package SukumaWooTracking
  */
 
 /**
