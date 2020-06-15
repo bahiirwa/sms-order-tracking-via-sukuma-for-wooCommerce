@@ -168,16 +168,16 @@ function wbsm_theme_initialize_inputs() {
 	);
 
 	add_settings_field(
-		'WooCommerce Order Status',
-		__( 'WooCommerce Order Status', 'wbsm-sms-manager' ),
+		'SMS Order Status',
+		__( 'SMS Order Status', 'wbsm-sms-manager' ),
 		'wbsm_woo_order_status_sms_callback',
 		'wbsm_notifications_settings',
 		'wbsm_account_settings'
 	);
 
 	add_settings_field(
-		'WooCommerce Order Notes',
-		__( 'WooCommerce Order Notes', 'wbsm-sms-manager' ),
+		'SMS Order Notes',
+		__( 'SMS Order Notes', 'wbsm-sms-manager' ),
 		'wbsm_woo_order_notes_sms_callback',
 		'wbsm_notifications_settings',
 		'wbsm_account_settings'
@@ -266,7 +266,7 @@ function wbsm_woo_order_status_sms_callback() {
 	$woo_order_status_sms = ! empty( $options['woo_order_status_sms'] ) ? $options['woo_order_status_sms'] : '';
 	$html = '<input type="checkbox" id="woo_order_status_sms" name="wbsm_notifications_settings[woo_order_status_sms]" value="1"' . checked( 1, $woo_order_status_sms, false ) . '/>';
 	$html .= '&nbsp;';
-	$html .= '<label for="woo_order_status_sms">Turn on WooCommerce Order Notes Change SMS Usage</label>';
+	$html .= '<label for="woo_order_status_sms">Send SMS on WooCommerce Order Status Change</label>';
 	
 	echo $html;
 
@@ -279,7 +279,7 @@ function wbsm_woo_order_notes_sms_callback() {
 	$woo_order_notes_sms = ! empty( $options['woo_order_notes_sms'] ) ? $options['woo_order_notes_sms'] : '';
 	$html = '<input type="checkbox" id="woo_order_notes_sms" name="wbsm_notifications_settings[woo_order_notes_sms]" value="1"' . checked( 1, $woo_order_notes_sms, false ) . '/>';
 	$html .= '&nbsp;';
-	$html .= '<label for="woo_order_notes_sms">Turn on WooCommerce Order Notes Change SMS Usage</label>';
+	$html .= '<label for="woo_order_notes_sms">Send SMS on WooCommerce Order Notes to Customer</label>';
 	
 	echo $html;
 

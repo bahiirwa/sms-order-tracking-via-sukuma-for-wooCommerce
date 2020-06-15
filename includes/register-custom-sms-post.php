@@ -13,7 +13,7 @@
 function wsmsot_sms_setup_post_type() {
 	$args = array(
 		'public'       => true,
-		'label'        => __( 'Messages', 'textdomain' ),
+		'label'        => __( 'SMS Report', 'textdomain' ),
 		'menu_icon'    => 'dashicons-email-alt',
 		'supports'     => array( 'title' ),
 		'map_meta_cap' => true,

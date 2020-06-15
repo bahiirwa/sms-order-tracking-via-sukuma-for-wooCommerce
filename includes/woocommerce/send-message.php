@@ -8,7 +8,17 @@
  * @license  GPL2 or Later
  */
 
-add_action( 'woocommerce_order_status_changed', 'send_sms_onchange_order', 10, 4 );
+// When order sending turned on.
+if ( '1' === WBSM_WOO_NOTIFICATIONS ) {
+	// When Plugins loaded.
+	add_action( 'woocommerce_order_status_changed', 'send_sms_onchange_order', 10, 4 );
+}
+
+// When Notes sending turned on.
+if ( '1' === WBSM_WOO_NOTES_SMS ) {
+	add_action( 'woocommerce_new_customer_note_notification', 'send_sms_on_new_order_note', 10 );
+}
+
 
 /**
  * Send SMS on change of order status.
@@ -28,13 +38,18 @@ function send_sms_onchange_order( $order_id, $old_status, $new_status, $order ) 
 		$phone      = qualify_phone_number( $order->get_billing_phone() );
 		$shop_name  = get_option( 'woocommerce_email_from_name' );
 		$message    = "Thank you {$first_name} . Your order # {$order_id} is {$new_status}. {$shop_name}";
+		$status     = $order->get_status();
 
-		// Arguments:: number to send to, message, optional sender ID.
-		sukuma_send_sms_data( $phone, $message, $shop_name );
+		$send = false;
+
+		// If the order status is activated, then send the SMS.
+		if ( 'yes' === get_option( 'wc_cashleo_order_' . $status ) ) {
+			
+			// Arguments:: number to send to, message, optional sender ID.
+			sukuma_send_sms_data( $phone, $message, $shop_name );
+		}
 	}
 }
-
-add_action( 'woocommerce_new_customer_note_notification', 'send_sms_on_new_order_note', 10 );
 
 /**
  * Send SMS on new order note to customer.
@@ -55,4 +70,28 @@ function send_sms_on_new_order_note( $email_args ) {
 		// Arguments:: number to send to, message, optional sender ID.
 		sukuma_send_sms_data( $phone, $message, $shop_name );
 	}
+}
+
+function wporg_add_custom_box() {
+    $screens = ['shop_order' ];
+    foreach ($screens as $screen) {
+        add_meta_box(
+            'wporg_box_id',           // Unique ID
+            'Custom Meta Box Title',  // Box title
+            'wporg_custom_box_html',  // Content callback, must be of type callable
+            $screen                   // Post type
+        );
+	}
+	
+}
+add_action('add_meta_boxes', 'wporg_add_custom_box');
+
+function wporg_custom_box_html()
+{	
+	global $post;
+	echo '<pre>';
+	var_dump( $post );
+	echo '</pre>';
+
+	$value = get_post_meta($post->ID );
 }

@@ -80,7 +80,7 @@ class Cashleo_WC_SMS_Admin {
 			),
 
 			array(
-				'id'            => 'wc_cashleo_order_on-hold',
+				'id'            => 'wc_cashleo_order_on_hold',
 				'desc'          => 'On-Hold',
 				'default'       => 'no',
 				'type'          => 'checkbox',
