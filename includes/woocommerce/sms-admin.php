@@ -11,7 +11,7 @@
 class WSMSOT_WC_SMS_Admin {
 
 	/**
-	 * wsmsmot_WC_SMS_Admin constructor.
+	 * WSMSOT_WC_SMS_Admin constructor.
 	 */
 	public function __construct() {
 		add_filter( 'woocommerce_settings_tabs_array', array( $this, 'add_settings_tab' ), 100 );
@@ -20,11 +20,11 @@ class WSMSOT_WC_SMS_Admin {
 	}
 
 	/**
-	 * Add wsmsmot settings tab.
+	 * Add WSMSMOT settings tab.
 	 *
-	 * @param array $settings_tabs.
+	 * @param array $settings_tabs Woo Setting Tabs.
 	 *
-	 * @return array
+	 * @return array $wsmsmot_settings_tab
 	 */
 	public function add_settings_tab( $settings_tabs ) {
 
@@ -54,7 +54,7 @@ class WSMSOT_WC_SMS_Admin {
 	}
 
 	/**
-	 * wsmsmot WooCommerce settings.
+	 * WSMSMOT WooCommerce settings.
 	 *
 	 * @return mixed|void
 	 */
@@ -64,12 +64,12 @@ class WSMSOT_WC_SMS_Admin {
 			array(
 				'title' => 'SMS Account Balance',
 				'type'  => 'title',
-                'desc'  => 'Balance: <span style="background-color: green; padding: 0 8px; color: white;">UGX ' . get_option( 'tpress_account_balance' ) . '</span> To Purchase more SMS credit, send mm to 0782886702 with your account name to top up your credit.</a>',
+				'desc'  => 'Balance: <span style="background-color: green; padding: 0 8px; color: white;">UGX ' . get_option( 'tpress_account_balance' ) . '</span> To Purchase more SMS credit, send mm to 0782886702 with your account name to top up your credit.</a>',
 			),
-            
-            array( 'type' => 'sectionend' ),
-            
-            array(
+			
+			array( 'type' => 'sectionend' ),
+			
+			array(
 				'title' => 'Customer SMS Notifications',
 				'type'  => 'title',
 				'desc'  => 'This section lets you select the order status changes that will send a SMS notification to customers',
@@ -134,19 +134,19 @@ class WSMSOT_WC_SMS_Admin {
 			),
 
 			array( 'type' => 'sectionend' ),
-            
+			
 			array( 
-                'type' => 'title',
+				'type' => 'title',
 				'name'     => 'Default Customer SMS Message',
 				'desc'     => '<hr>'
-            ),
+			),
 
 			array( 'type' => 'sectionend' ),
 
 			array(
 				'id'       => 'wc_wsmsmot_admin_codes-description',
 				'name'     => 'Use the tags below to customize the Customer Message below:',
-                'desc'     => '<p>
+				'desc'     => '<p>
 								<code>%first_name%</code>: Customer\'s First Name
 								<code>%last_name%</code>: Customer\'s Last Name
 								<code>%phone_number%</code>: Customer\'s Phone Number

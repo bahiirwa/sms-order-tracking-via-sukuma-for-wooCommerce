@@ -53,7 +53,7 @@ function send_sms_onchange_order( $order_id, $old_status, $new_status, $order ) 
 				$message = "Thank you {$first_name} . Your order # {$order_id} is {$new_status}. {$shop_name}";
 			}
 
-			// Replacements
+			// Replacements variables in the default messages.
 			$replacements = array(
 				'%first_name%'     => $first_name,
 				'%last_name%'      => $order->get_billing_last_name(),
