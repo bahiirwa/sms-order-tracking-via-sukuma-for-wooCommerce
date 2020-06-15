@@ -41,12 +41,12 @@ function sukuma_send_sms_data( string $send_to_sms_number = 'NULL', string $send
 		return "Something went wrong: $error_message";
 	}
 	
-	$status = wp_remote_retrieve_response_code($response);
-	$response =  wp_remote_retrieve_body($response);
+	$status   = wp_remote_retrieve_response_code( $response );
+	$response =  wp_remote_retrieve_body( $response );
 	
 	update_option( 'sms_result', $response );
 
-	store_inside_sms_cpt( $msgdata, $response, $status);
+	store_inside_sms_cpt( $msgdata, $response, $status );
 
 	get_account_balance();
 
@@ -63,21 +63,21 @@ function store_inside_sms_cpt( $data_to_send_api, $response, $status ) {
 		$cost = 0;
 	}
 	// Create post object
-	$my_post = array(
-	// 'post_title'    => wp_strip_all_tags( $_POST['post_title'] ),
+	$sms_response_post = array(
+	'post_title'    => wp_strip_all_tags( $data_to_send_api['msgdata'][0]['senderid'] . ' - ' . $data_to_send_api['msgdata'][0]['number'] ),
 	'post_type'     => 'sms',
 	'post_status'   => 'publish',
 	'meta_input'    => array(
-		'sender_id_field_meta_key'  => $data_to_send_api['msgdata'][0]['senderid'],
-		'sender_numbers_field_meta_key'  => $data_to_send_api['msgdata'][0]['number'],
-		'sender_msg_field_meta_key'  => $data_to_send_api['msgdata'][0]['message'],
-		'sms_sent_status_meta_key'  => $results->Status . ' - ' . (isset($results->Message) ? $results->Message : ''),
-		'sms_cost_meta_key'  => $cost,
+    'sender_id_field_meta_key'      => $data_to_send_api['msgdata'][0]['senderid'],
+    'sender_numbers_field_meta_key' => $data_to_send_api['msgdata'][0]['number'],
+    'sender_msg_field_meta_key'     => $data_to_send_api['msgdata'][0]['message'],
+    'sms_sent_status_meta_key'      => $results->Status . (isset($results->Message) ?  ' - ' . $results->Message : ''),
+    'sms_cost_meta_key'             => $cost,
 	),
   );
    
   // Insert the post into the database
-  wp_insert_post( $my_post );
+  wp_insert_post( $sms_response_post );
 }
 
 /**
@@ -139,9 +139,17 @@ function get_account_balance() {
 }
 
 function qualify_phone_number( $phone ) {
+	// Confirm not empty.
 	if( ! empty( $phone ) ) {
 		// Remove all chars but numbers
-		$phone = preg_replace( '/[^0-9]/', '', $phone ); 
+		$phone = preg_replace( '/[^0-9]/', '', $phone );
+
+		// Check that is is 12 characters 
+			// if more return
+			// if less 
+				// Check for first 256 
+					// existing return
+					// else add missing return $phone
 		return $phone;
 	}
 }
