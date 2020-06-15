@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin name: Woocommerce & Bulk SMS Manager
+ * Plugin name: Woocommerce SMS Order Tracking
  * Plugin URI: https://omukiguy.com
- * Description: Send Bulk SMS or Add SMS Notifications to your WooCommerce E-Shop.
+ * Description: Send SMS Notifications to your customers when order status changes or when you make a new order note in your WooCommerce E-Shop.
  * Author: Laurence Bahiirwa
  * Author URI: https://omukiguy.com
- * Version: 0.1.0
+ * Version: 0.2.0
  * License: GPL2 or Later.
  * License URL: http://www.gnu.org/licenses/gpl-2.0.txt
  * text-domain: wbsm-sms-manager
@@ -35,8 +35,6 @@ $options              = get_option( 'wbsm_notifications_settings' );
 
 $user_name            = ( isset( $options['wbsm_user_name'] ) ) ? $options['wbsm_user_name'] : '';
 $user_password        = ( isset( $options['wbsm_user_password'] ) ) ? $options['wbsm_user_password'] : '0';
-$admin_phone          = ( isset( $options['wbsm_admin_phone'] ) ) ? $options['wbsm_admin_phone'] : '';
-$sender_id            = ( isset( $options['wbsm_sender_id'] ) ) ? $options['wbsm_sender_id'] : get_bloginfo('name');
 $woo_order_status_sms = ( isset( $options['woo_order_status_sms'] ) ) ? $options['woo_order_status_sms'] : '0';
 $woo_order_notes_sms  = ( isset( $options['woo_order_notes_sms'] ) ) ? $options['woo_order_notes_sms'] : '0';
 
@@ -47,8 +45,6 @@ if ( '' === $user_name || '' === $user_password || empty( $user_name ) || empty(
 
 define( 'WBSM_USERNAME', $user_name );
 define( 'WBSM_PASSWORD', $user_password );
-define( 'WBSM_ADMIN_PHONE', $admin_phone );
-define( 'WBSM_SENDER_ID', $sender_id );
 define( 'WBSM_WOO_NOTIFICATIONS', $woo_order_status_sms );
 define( 'WBSM_WOO_NOTES_SMS', $woo_order_status_sms );
 
@@ -73,10 +69,10 @@ function activation_initial_functions() {
 register_activation_hook( __FILE__ , 'activation_initial_functions' );
 register_deactivation_hook( __FILE__ , 'sms_manager_deregister_role' );
 
-// if ( '1' === WBSM_WOO_NOTIFICATIONS || '1' === WBSM_WOO_NOTES_SMS ) {
+if ( '1' === WBSM_WOO_NOTIFICATIONS || '1' === WBSM_WOO_NOTES_SMS ) {
 	// When Plugins loaded.
 	add_action( 'plugins_loaded', 'woo_wbsm_init', 0 );
-// }
+}
 
 function woo_wbsm_init() {
 
