@@ -8,7 +8,7 @@
  * Version: 0.2.0
  * License: GPL2 or Later.
  * License URL: http://www.gnu.org/licenses/gpl-2.0.txt
- * text-domain: wbsm-sms-manager
+ * text-domain: woo-sms-order-tracking
  */
 
 // If this file is access directly, abort!!!
