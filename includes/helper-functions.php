@@ -46,7 +46,7 @@ function sukuma_send_sms_data( string $send_to_sms_number = 'NULL', string $send
 	
 	update_option( 'sms_result', $response );
 
-	store_inside_sms_cpt( $data_to_send_api, $response, $status);
+	store_inside_sms_cpt( $msgdata, $response, $status);
 
 	get_account_balance();
 
@@ -71,7 +71,7 @@ function store_inside_sms_cpt( $data_to_send_api, $response, $status ) {
 		'sender_id_field_meta_key'  => $data_to_send_api['msgdata'][0]['senderid'],
 		'sender_numbers_field_meta_key'  => $data_to_send_api['msgdata'][0]['number'],
 		'sender_msg_field_meta_key'  => $data_to_send_api['msgdata'][0]['message'],
-		'sms_sent_status_meta_key'  => $results->Status . ' - ' . $results->Message,
+		'sms_sent_status_meta_key'  => $results->Status . ' - ' . (isset($results->Message) ? $results->Message : ''),
 		'sms_cost_meta_key'  => $cost,
 	),
   );
