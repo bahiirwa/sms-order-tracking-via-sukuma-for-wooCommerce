@@ -1,5 +1,5 @@
-# Bulk & Woocommerce SMS Manager 
+# woocommerce-sms-order-tracking
 
-Send Bulk SMS or Add SMS Notifications to your WooCommerce E-Shop.
+Send SMS Notifications to your WooCommerce E-Shop when order status or customer notices change.
 
 ## Work in Progress.
