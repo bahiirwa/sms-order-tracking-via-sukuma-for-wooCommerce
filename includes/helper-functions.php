@@ -46,7 +46,7 @@ function sukuma_send_sms_data( string $send_to_sms_number = 'NULL', string $send
 	
 	update_option( 'sms_result', $response );
 
-	store_inside_sms_cpt( $data_to_send_api, $response, $status);
+	store_inside_sms_cpt( $data_to_send_api, $response, $status );
 
 	get_account_balance();
 
@@ -121,7 +121,6 @@ function get_account_balance() {
 
 	if ( 'Failed' === $balance->Status && $balance->Message ) {
 		echo '<p>Message: ' . $balance->Message . ' Kindly check your account settings.<p>';
-		update_option( 'tpress_account_balance' , '0' );
 		return;
 	}
 

@@ -1,5 +1,5 @@
-# Woocommerce SMS Order Tracking
+# Bulk & Woocommerce SMS Manager 
 
-Send SMS Notifications to your WooCommerce E-Shop when order status or customer notices change using MTN and Airtel Uganda networks.
+Send Bulk SMS or Add SMS Notifications to your WooCommerce E-Shop.
 
 ## Work in Progress.

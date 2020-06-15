@@ -211,7 +211,7 @@ function wbsm_user_name_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 	
 	$wbsm_user_name = ! empty( $options['wbsm_user_name'] ) ? $options['wbsm_user_name'] : '';
-	echo '<input type="text" id="wbsm_user_name" name="wbsm_notifications_settings[wbsm_user_name]" value="' . $wbsm_user_name . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your SukumaSMS Account Username.</span>';
+	echo '<input type="text" id="wbsm_user_name" name="wbsm_notifications_settings[wbsm_user_name]" value="' . $wbsm_user_name . '" /><span class="description">Add your SukumaSMS Account Username.</span>';
 	
 } // end wbsm_user_name_callback
 
@@ -220,7 +220,7 @@ function wbsm_user_password_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 
 	$wbsm_user_password = ! empty( $options['wbsm_user_password'] ) ? $options['wbsm_user_password'] : '';
-	echo '<input type="password" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your SukumaSMS Account Password.</span>';
+	echo '<input type="text" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description">Add your SukumaSMS Account Password.</span>';
 	
 } // end wbsm_user_password_callback
 
@@ -229,7 +229,7 @@ function wbsm_admin_phone_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 	
 	$phone = ! empty( $options['wbsm_admin_phone'] ) ? $options['wbsm_admin_phone'] : '';
-	echo '<input type="text" id="wbsm_admin_phone" name="wbsm_notifications_settings[wbsm_admin_phone]" value="' . $phone . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your Administrative SMS Number.</span>';
+	echo '<input type="text" id="wbsm_admin_phone" name="wbsm_notifications_settings[wbsm_admin_phone]" value="' . $phone . '" /><span class="description">Add your Administrative SMS Number.</span>';
 	
 } // end wbsm_admin_phone_callback
 
@@ -239,7 +239,7 @@ function wbsm_sender_id_callback() {
 	$blogname = get_option( 'blogname' );
 	
 	$wbsm_sender_id = ! empty( $options['wbsm_sender_id'] ) ? $options['wbsm_sender_id'] : $blogname;
-	echo '<input type="text" id="wbsm_sender_id" name="wbsm_notifications_settings[wbsm_sender_id]" value="' . $wbsm_sender_id . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your sender ID. This defaults to your Website Name if not changed.</span>';
+	echo '<input type="text" id="wbsm_sender_id" name="wbsm_notifications_settings[wbsm_sender_id]" value="' . $wbsm_sender_id . '" /><span class="description">Add your default sender ID. This can be your Business Name or anything else.</span>';
 	
 } // end wbsm_sender_id_callback
 
