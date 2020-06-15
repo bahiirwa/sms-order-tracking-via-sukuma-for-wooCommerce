@@ -40,12 +40,11 @@ function send_sms_onchange_order( $order_id, $old_status, $new_status, $order ) 
 		$message    = "Thank you {$first_name} . Your order # {$order_id} is {$new_status}. {$shop_name}";
 		$status     = $order->get_status();
 
-		$send = false;
-
-		// If the order status is activated, then send the SMS.
+		/**
+		 * If the order status is activated, then send the SMS.
+		 * sukuma_send_sms_data() Arguments:: number to send to, message, optional sender ID.
+		 */
 		if ( 'yes' === get_option( 'wc_cashleo_order_' . $status ) ) {
-			
-			// Arguments:: number to send to, message, optional sender ID.
 			sukuma_send_sms_data( $phone, $message, $shop_name );
 		}
 	}
@@ -70,28 +69,4 @@ function send_sms_on_new_order_note( $email_args ) {
 		// Arguments:: number to send to, message, optional sender ID.
 		sukuma_send_sms_data( $phone, $message, $shop_name );
 	}
-}
-
-function wporg_add_custom_box() {
-    $screens = ['shop_order' ];
-    foreach ($screens as $screen) {
-        add_meta_box(
-            'wporg_box_id',           // Unique ID
-            'Custom Meta Box Title',  // Box title
-            'wporg_custom_box_html',  // Content callback, must be of type callable
-            $screen                   // Post type
-        );
-	}
-	
-}
-add_action('add_meta_boxes', 'wporg_add_custom_box');
-
-function wporg_custom_box_html()
-{	
-	global $post;
-	echo '<pre>';
-	var_dump( $post );
-	echo '</pre>';
-
-	$value = get_post_meta($post->ID );
 }
