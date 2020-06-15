@@ -137,16 +137,16 @@ class WSMSOT_WC_SMS_Admin {
 			
 			array( 
 				'type' => 'title',
-				'name'     => 'Default Customer SMS Message',
-				'desc'     => '<hr>'
+				'name' => 'Default Customer SMS Message',
+				'desc' => '<hr>'
 			),
 
 			array( 'type' => 'sectionend' ),
 
 			array(
-				'id'       => 'wc_wsmsmot_admin_codes-description',
-				'name'     => 'Use the tags below to customize the Customer Message below:',
-				'desc'     => '<p>
+				'id'   => 'wc_wsmsmot_admin_codes-description',
+				'name' => 'Use the tags below to customize the Customer Message below:',
+				'desc' => '<p>
 								<code>%first_name%</code>: Customer\'s First Name
 								<code>%last_name%</code>: Customer\'s Last Name
 								<code>%phone_number%</code>: Customer\'s Phone Number
@@ -156,7 +156,7 @@ class WSMSOT_WC_SMS_Admin {
 								<code>%order_amount%</code>: The Order Amount
 								<code>%store_currency%</code>: The default currency of the store
 								<code>%order_status%</code>: The Order Status</p>',
-				'type'     => 'title',
+				'type' => 'title',
 			),
 
 			array(
