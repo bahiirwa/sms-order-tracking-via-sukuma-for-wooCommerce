@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin name: Woocommerce SMS Order Tracking
+ * Plugin name: Woocommerce & Bulk SMS Manager
  * Plugin URI: https://omukiguy.com
- * Description: Send SMS Notifications to your customers when order status changes or when you make a new order note in your WooCommerce E-Shop.
+ * Description: Send Bulk SMS or Add SMS Notifications to your WooCommerce E-Shop.
  * Author: Laurence Bahiirwa
  * Author URI: https://omukiguy.com
- * Version: 0.2.0
+ * Version: 0.1.0
  * License: GPL2 or Later.
  * License URL: http://www.gnu.org/licenses/gpl-2.0.txt
  * text-domain: wbsm-sms-manager
@@ -73,10 +73,10 @@ function activation_initial_functions() {
 register_activation_hook( __FILE__ , 'activation_initial_functions' );
 register_deactivation_hook( __FILE__ , 'sms_manager_deregister_role' );
 
-if ( '1' === WBSM_WOO_NOTIFICATIONS || '1' === WBSM_WOO_NOTES_SMS ) {
+// if ( '1' === WBSM_WOO_NOTIFICATIONS || '1' === WBSM_WOO_NOTES_SMS ) {
 	// When Plugins loaded.
 	add_action( 'plugins_loaded', 'woo_wbsm_init', 0 );
-}
+// }
 
 function woo_wbsm_init() {
 

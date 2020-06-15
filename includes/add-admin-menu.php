@@ -28,6 +28,7 @@ function sukuma_admin_stuff() {
 	
 	echo '<h3>SMS Balance: UGX <span style="background-color: green; padding: 0 8px; color: white;">' . $sms_balance . '</span><h3>';
 	echo '<hr>';
+
 }
 
 /**
@@ -220,7 +221,8 @@ function wbsm_user_password_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 
 	$wbsm_user_password = ! empty( $options['wbsm_user_password'] ) ? $options['wbsm_user_password'] : '';
-	echo '<input type="password" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your SukumaSMS Account Password.</span>';
+	echo '<input type="password" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your SukumaSMS Account Password.</span>
+	<p style="margin-top:10px;"><input type="checkbox" onclick="wbsm_password_toggle()">Show Password</p>';
 	
 } // end wbsm_user_password_callback
 
@@ -307,3 +309,21 @@ function wbsm_theme_validate_inputs( $input ) {
 	return apply_filters( 'wbsm_theme_validate_inputs', $output, $input );
 
 } // end wbsm_theme_validate_inputs
+
+
+add_action( 'admin_footer', 'wbsm_toggle_password' );
+
+function wbsm_toggle_password() {
+	?>
+	<script>
+		function wbsm_password_toggle() {
+			var password_box = document.getElementById("wbsm_user_password");
+			if (password_box.type === "password") {
+				password_box.type = "text";
+			} else {
+				password_box.type = "password";
+			}
+		}
+	</script>
+	<?php
+}

@@ -11,7 +11,9 @@
  */
 function wbsm_plugin_action_links( $links ) {
 
-    if ( 1 == WBSM_WOO_NOTIFICATIONS ) {
+    $options = get_option( 'wbsm_notifications_settings' );
+
+    if ( isset( $options['woo_order_status_sms'] ) ) {
         $link_woo_sms = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=cashleo_sms' ) ) . '">' . __( 'WooCommerce Settings', 'wbsm-sms-manager' ) . '</a>';
     } else {
         $link_woo_sms = '';
