@@ -8,7 +8,7 @@
  * Version: 1.0.0
  * License: GPL2 or Later.
  * License URL: http://www.gnu.org/licenses/gpl-2.0.txt
- * Text-domain: woo-sms-order-tracking
+ * Text-domain: sms-order-tracking-via-sukuma
  *
  * @package SukumaWooTracking
  */
