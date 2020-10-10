@@ -1,4 +1,4 @@
-=== Sukuma Woocommerce SMS Order Tracking ===
+=== SMS Order Tracking via Sukuma for WooCommerce ===
 Contributors: laurencebahiirwa
 Donate link: https://omukiguy.com/donate
 Tags: woocommerce, sms, notifications, order, notes

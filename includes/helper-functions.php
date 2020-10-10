@@ -15,8 +15,8 @@ function sukuma_send_sms_data( string $send_to_sms_number = 'NULL', string $send
 	$msgdata = array(
 		'method' => 'SendSms',
 		'userdata' => array(
-			'username' => WBSM_USERNAME,
-			'password' => WBSM_PASSWORD,
+			'username' => SOTVSW_USERNAME,
+			'password' => SOTVSW_PASSWORD,
 		),
 		'msgdata' => array(
 			array(
@@ -91,8 +91,8 @@ function get_account_balance() {
     $args = array(
         'method' => 'Balance',
         'userdata' => array(
-            'username' => WBSM_USERNAME,
-            'password' => WBSM_PASSWORD,
+            'username' => SOTVSW_USERNAME,
+            'password' => SOTVSW_PASSWORD,
         )
     );
 
