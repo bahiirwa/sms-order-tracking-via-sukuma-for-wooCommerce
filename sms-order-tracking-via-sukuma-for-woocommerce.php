@@ -12,7 +12,7 @@
  *
  * WC requires at least: 3.0
  * WC tested up to: 4.6.1
- * 
+ *
  * @package SMSOrderTrackingViaSukumaforWoocommerce
  */
 
@@ -81,7 +81,7 @@ register_deactivation_hook( __FILE__, 'sms_manager_deregister_role' );
 
 if ( '1' === SOTVSW_WOO_NOTIFICATIONS || '1' === SOTVSW_WOO_NOTES_SMS ) {
 	// When Plugins loaded.
-	add_action( 'plugins_loaded', 'woo_SOTVSW_init', 0 );
+	add_action( 'plugins_loaded', 'woo_sotvsw_init', 0 );
 }
 
 /**
@@ -89,12 +89,12 @@ if ( '1' === SOTVSW_WOO_NOTIFICATIONS || '1' === SOTVSW_WOO_NOTES_SMS ) {
  *
  * @return void
  */
-function woo_SOTVSW_init() {
+function woo_sotvsw_init() {
 
 	if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
 
 		// Check if WooCommerce is active.
-		add_action( 'admin_notices', 'SOTVSW_woocommerce_not_installed_notice' );
+		add_action( 'admin_notices', 'sotvsw_woocommerce_not_installed_notice' );
 		return;
 	}
 
@@ -107,7 +107,7 @@ function woo_SOTVSW_init() {
  *
  * @return void
  */
-function SOTVSW_woocommerce_not_installed_notice() {
+function sotvsw_woocommerce_not_installed_notice() {
 	$message = sprintf(
 		/* translators: URL of WooCommerce plugin */
 		__( 'WBSM SMS Notifications for WooCommerce plugin requires <a href="%s">WooCommerce</a> 3.0 or greater to be installed and active.', 'sms-order-tracking-via-sukuma-for-woocommerce' ),

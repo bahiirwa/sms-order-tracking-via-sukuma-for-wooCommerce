@@ -58,7 +58,7 @@ function SOTVSW_theme_display() {
 	<div class="wrap">
 	
 		<div id="icon-themes" class="icon32"></div>
-		<h2><?php _e( 'Bulk & WooCommerce SMS Notifications.', 'wbsm-sms-manager' ); ?></h2>
+		<h2><?php _e( 'Bulk & WooCommerce SMS Notifications.', 'sms-order-tracking-via-sukuma-for-woocommerce' ); ?></h2>
 		
 		<?php settings_errors(); ?>
 		
@@ -120,14 +120,14 @@ function SOTVSW_theme_initialize_inputs() {
 
 	add_settings_section(
 		'SOTVSW_account_settings',
-		__( 'Account Settings', 'wbsm-sms-manager' ),
+		__( 'Account Settings', 'sms-order-tracking-via-sukuma-for-woocommerce' ),
 		'SOTVSW_account_settings_callback',
 		'SOTVSW_notifications_settings'
 	);
 	
 	add_settings_field(	
 		'Account Username',						
-		__( 'Account Username', 'wbsm-sms-manager' ),							
+		__( 'Account Username', 'sms-order-tracking-via-sukuma-for-woocommerce' ),							
 		'SOTVSW_user_name_callback',	
 		'SOTVSW_notifications_settings',	
 		'SOTVSW_account_settings'			
@@ -135,7 +135,7 @@ function SOTVSW_theme_initialize_inputs() {
 
 	add_settings_field(	
 		'Account Password',						
-		__( 'Account Password', 'wbsm-sms-manager' ),							
+		__( 'Account Password', 'sms-order-tracking-via-sukuma-for-woocommerce' ),							
 		'SOTVSW_user_password_callback',	
 		'SOTVSW_notifications_settings',	
 		'SOTVSW_account_settings'			
@@ -143,7 +143,7 @@ function SOTVSW_theme_initialize_inputs() {
 
 	add_settings_field(	
 		'Admin Phone Number',						
-		__( 'Admin Phone Number', 'wbsm-sms-manager' ),							
+		__( 'Admin Phone Number', 'sms-order-tracking-via-sukuma-for-woocommerce' ),							
 		'SOTVSW_admin_phone_callback',	
 		'SOTVSW_notifications_settings',	
 		'SOTVSW_account_settings'			
@@ -151,7 +151,7 @@ function SOTVSW_theme_initialize_inputs() {
 
 	add_settings_field(	
 		'Sender ID',						
-		__( 'Sender ID', 'wbsm-sms-manager' ),							
+		__( 'Sender ID', 'sms-order-tracking-via-sukuma-for-woocommerce' ),							
 		'SOTVSW_sender_id_callback',	
 		'SOTVSW_notifications_settings',	
 		'SOTVSW_account_settings'			
@@ -159,7 +159,7 @@ function SOTVSW_theme_initialize_inputs() {
 	
 	add_settings_field(
 		'Bulk SMS',
-		__( 'Bulk SMS', 'wbsm-sms-manager' ),
+		__( 'Bulk SMS', 'sms-order-tracking-via-sukuma-for-woocommerce' ),
 		'SOTVSW_bulk_sms_usage_callback',
 		'SOTVSW_notifications_settings',
 		'SOTVSW_account_settings'
@@ -167,7 +167,7 @@ function SOTVSW_theme_initialize_inputs() {
 
 	add_settings_field(
 		'SMS Order Status',
-		__( 'SMS Order Status', 'wbsm-sms-manager' ),
+		__( 'SMS Order Status', 'sms-order-tracking-via-sukuma-for-woocommerce' ),
 		'SOTVSW_woo_order_status_sms_callback',
 		'SOTVSW_notifications_settings',
 		'SOTVSW_account_settings'
@@ -175,7 +175,7 @@ function SOTVSW_theme_initialize_inputs() {
 
 	add_settings_field(
 		'SMS Order Notes',
-		__( 'SMS Order Notes', 'wbsm-sms-manager' ),
+		__( 'SMS Order Notes', 'sms-order-tracking-via-sukuma-for-woocommerce' ),
 		'SOTVSW_woo_order_notes_sms_callback',
 		'SOTVSW_notifications_settings',
 		'SOTVSW_account_settings'
@@ -199,7 +199,7 @@ add_action( 'admin_init', 'SOTVSW_theme_initialize_inputs' );
  * in the add_settings_section function.
  */
 function SOTVSW_account_settings_callback() {
-	echo '<p>' . __( 'All fields should be filled correctly to enable your SMS to work.', 'wbsm-sms-manager' ) . '</p>';
+	echo '<p>' . __( 'All fields should be filled correctly to enable your SMS to work.', 'sms-order-tracking-via-sukuma-for-woocommerce' ) . '</p>';
 } // end SOTVSW_general_options_callback
 
 /* ------------------------------------------------------------------------ *
