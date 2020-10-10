@@ -39,14 +39,18 @@ $woo_order_status_sms = ( isset( $options['woo_order_status_sms'] ) ) ? $options
 $woo_order_notes_sms  = ( isset( $options['woo_order_notes_sms'] ) ) ? $options['woo_order_notes_sms'] : '0';
 
 // No credentials exist, Don't run these files below.
-if ( '' === $user_name || '' === $user_password || empty( $user_name ) || empty( $user_password ) ) {
-	return;
+if ( empty( $user_name ) || '' == $user_name ) {
+	define( 'WBSM_USERNAME', $user_name );
 }
 
-define( 'WBSM_USERNAME', $user_name );
-define( 'WBSM_PASSWORD', $user_password );
-define( 'WBSM_WOO_NOTIFICATIONS', $woo_order_status_sms );
-define( 'WBSM_WOO_NOTES_SMS', $woo_order_status_sms );
+if ( empty( $user_password ) || '' == $user_password ) {
+	define( 'WBSM_PASSWORD', $user_password );
+}
+
+if ( empty( $woo_order_status_sms ) || '' == $woo_order_status_sms ) {
+	define( 'WBSM_WOO_NOTIFICATIONS', $woo_order_status_sms );
+	define( 'WBSM_WOO_NOTES_SMS', $woo_order_status_sms );
+}
 
 // require_once WBSM_SMS_DIR . '/includes/register-add-roles.php';
 require_once WBSM_SMS_DIR . '/includes/helper-functions.php';
