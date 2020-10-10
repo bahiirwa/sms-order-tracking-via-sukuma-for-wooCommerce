@@ -2,17 +2,15 @@
 /**
  * Register a custom menu page
  */
-if ( ! class_exists( 'WooCommerce' ) ) {
-	add_action( 'admin_menu', 'techiepress_register_woo_admin_menu' );
-}
+add_action( 'admin_menu', 'techiepress_register_woo_admin_menu' );
 
 function techiepress_register_woo_admin_menu() {
 	add_submenu_page(
 		'woocommerce', 
 		__( 'SMS Plugin Settings', 'textdomain' ),
-		'Bulk SMS Settings', 
+		'Order SMS Tracking Settings', 
 		'manage_options', 
-		'wc-settings&tab=cashleo_sms',
+		'wc-settings&tab=wsmsmot_sms',
 		'sukuma_admin_stuff'
 	); 
 }
@@ -37,11 +35,13 @@ function sukuma_admin_stuff() {
 function wbsm_general_admin_menu() {
 
 	add_menu_page(
-		'Bulk SMS',			 // The value used to populate the browser's title bar when the menu page is active
-		'Bulk SMS',		     // The text of the menu in the administrator's sidebar
-		'administrator',	 // What roles are able to access the menu
-		'wbsm_theme_menu',	 // The ID used to bind submenu items to this menu 
-		'wbsm_theme_display' // The callback function used to render this menu
+		'Woo Order SMS Tracking',
+		'Order SMS',
+		'manage_options',
+		'wbsm_theme_menu',
+		'wbsm_theme_display',
+		'dashicons-location-alt',
+		26
 	);
 
 } 
@@ -166,16 +166,16 @@ function wbsm_theme_initialize_inputs() {
 	);
 
 	add_settings_field(
-		'WooCommerce Order Status',
-		__( 'WooCommerce Order Status', 'wbsm-sms-manager' ),
+		'SMS Order Status',
+		__( 'SMS Order Status', 'wbsm-sms-manager' ),
 		'wbsm_woo_order_status_sms_callback',
 		'wbsm_notifications_settings',
 		'wbsm_account_settings'
 	);
 
 	add_settings_field(
-		'WooCommerce Order Notes',
-		__( 'WooCommerce Order Notes', 'wbsm-sms-manager' ),
+		'SMS Order Notes',
+		__( 'SMS Order Notes', 'wbsm-sms-manager' ),
 		'wbsm_woo_order_notes_sms_callback',
 		'wbsm_notifications_settings',
 		'wbsm_account_settings'
@@ -211,7 +211,7 @@ function wbsm_user_name_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 	
 	$wbsm_user_name = ! empty( $options['wbsm_user_name'] ) ? $options['wbsm_user_name'] : '';
-	echo '<input type="text" id="wbsm_user_name" name="wbsm_notifications_settings[wbsm_user_name]" value="' . $wbsm_user_name . '" /><span class="description">Add your SukumaSMS Account Username.</span>';
+	echo '<input type="text" id="wbsm_user_name" name="wbsm_notifications_settings[wbsm_user_name]" value="' . $wbsm_user_name . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your SukumaSMS Account Username.</span>';
 	
 } // end wbsm_user_name_callback
 
@@ -220,7 +220,8 @@ function wbsm_user_password_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 
 	$wbsm_user_password = ! empty( $options['wbsm_user_password'] ) ? $options['wbsm_user_password'] : '';
-	echo '<input type="text" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description">Add your SukumaSMS Account Password.</span>';
+	echo '<input type="password" id="wbsm_user_password" name="wbsm_notifications_settings[wbsm_user_password]" value="' . $wbsm_user_password . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your SukumaSMS Account Password.</span>
+	<p style="margin-top:10px;"><input type="checkbox" onclick="wbsm_password_toggle()">Show Password</p>';
 	
 } // end wbsm_user_password_callback
 
@@ -229,7 +230,7 @@ function wbsm_admin_phone_callback() {
 	$options = get_option( 'wbsm_notifications_settings' );
 	
 	$phone = ! empty( $options['wbsm_admin_phone'] ) ? $options['wbsm_admin_phone'] : '';
-	echo '<input type="text" id="wbsm_admin_phone" name="wbsm_notifications_settings[wbsm_admin_phone]" value="' . $phone . '" /><span class="description">Add your Administrative SMS Number.</span>';
+	echo '<input type="text" id="wbsm_admin_phone" name="wbsm_notifications_settings[wbsm_admin_phone]" value="' . $phone . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your Administrative SMS Number.</span>';
 	
 } // end wbsm_admin_phone_callback
 
@@ -239,7 +240,7 @@ function wbsm_sender_id_callback() {
 	$blogname = get_option( 'blogname' );
 	
 	$wbsm_sender_id = ! empty( $options['wbsm_sender_id'] ) ? $options['wbsm_sender_id'] : $blogname;
-	echo '<input type="text" id="wbsm_sender_id" name="wbsm_notifications_settings[wbsm_sender_id]" value="' . $wbsm_sender_id . '" /><span class="description">Add your default sender ID. This can be your Business Name or anything else.</span>';
+	echo '<input type="text" id="wbsm_sender_id" name="wbsm_notifications_settings[wbsm_sender_id]" value="' . $wbsm_sender_id . '" /><span class="description" style="margin-left:10px; color: #5a5a5a">Add your sender ID. This defaults to your Website Name if not changed.</span>';
 	
 } // end wbsm_sender_id_callback
 
@@ -263,7 +264,7 @@ function wbsm_woo_order_status_sms_callback() {
 	$woo_order_status_sms = ! empty( $options['woo_order_status_sms'] ) ? $options['woo_order_status_sms'] : '';
 	$html = '<input type="checkbox" id="woo_order_status_sms" name="wbsm_notifications_settings[woo_order_status_sms]" value="1"' . checked( 1, $woo_order_status_sms, false ) . '/>';
 	$html .= '&nbsp;';
-	$html .= '<label for="woo_order_status_sms">Turn on WooCommerce Order Notes Change SMS Usage</label>';
+	$html .= '<label for="woo_order_status_sms">Send SMS on WooCommerce Order Status Change</label>';
 	
 	echo $html;
 
@@ -276,7 +277,7 @@ function wbsm_woo_order_notes_sms_callback() {
 	$woo_order_notes_sms = ! empty( $options['woo_order_notes_sms'] ) ? $options['woo_order_notes_sms'] : '';
 	$html = '<input type="checkbox" id="woo_order_notes_sms" name="wbsm_notifications_settings[woo_order_notes_sms]" value="1"' . checked( 1, $woo_order_notes_sms, false ) . '/>';
 	$html .= '&nbsp;';
-	$html .= '<label for="woo_order_notes_sms">Turn on WooCommerce Order Notes Change SMS Usage</label>';
+	$html .= '<label for="woo_order_notes_sms">Send SMS on WooCommerce Order Notes to Customer</label>';
 	
 	echo $html;
 
@@ -295,11 +296,9 @@ function wbsm_theme_validate_inputs( $input ) {
 		
 		// Check to see if the current option has a value. If so, process it.
 		if( isset( $input[$key] ) ) {
-		
 			// Strip all HTML and PHP tags and properly handle quoted strings
-			$output[$key] = strip_tags( stripslashes( $input[ $key ] ) );
-			
-		} // end if
+			$output[$key] = wp_strip_all_tags( stripslashes( $input[ $key ] ) );
+		}
 		
 	} // end foreach
 	
@@ -307,3 +306,21 @@ function wbsm_theme_validate_inputs( $input ) {
 	return apply_filters( 'wbsm_theme_validate_inputs', $output, $input );
 
 } // end wbsm_theme_validate_inputs
+
+
+add_action( 'admin_footer', 'wbsm_toggle_password' );
+
+function wbsm_toggle_password() {
+	?>
+	<script>
+		function wbsm_password_toggle() {
+			var password_box = document.getElementById("wbsm_user_password");
+			if (password_box.type === "password") {
+				password_box.type = "text";
+			} else {
+				password_box.type = "password";
+			}
+		}
+	</script>
+	<?php
+}

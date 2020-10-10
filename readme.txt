@@ -1,18 +1,20 @@
-=== Bulk & Woocommerce SMS Manager ===
+=== Sukuma Woocommerce SMS Order Tracking ===
 Contributors: laurencebahiirwa
 Donate link: https://omukiguy.com/donate
-Tags: woocommerce, sms, sms notifications, order notifications
+Tags: woocommerce, sms, notifications, order, notes
 Requires at least: 4.9
 Tested up to: 5.4.1
 Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Send Bulk SMS or Add SMS Notifications to your WooCommerce E-Shop.
+Send SMS Notifications to your WooCommerce E-Shop when order status or customer notices change using MTN and Airtel Uganda networks.
 
 == Description ==
 
-> To use this plugin you need to open an account on <strong>[Jusibe](https://jusibe.com)</strong> and have SMS credits in your account.
+Send SMS Notifications to your WooCommerce E-Shop when order status or customer notices change using MTN and Airtel Uganda networks.
+
+> To use this plugin you need to open an account on <strong>[Sukumasms](https://send.sukumasms.com)</strong> and have SMS credits in your account.
 
 This is a WordPress and Woocommerce Order SMS notifications via a REST API to send SMS from your websites.
 
@@ -37,10 +39,10 @@ SMS messages can only be sent to Ugandan mobile numbers ( mtn & airtel )
 
 = Suggestions / Feature Request =
 
-If you have suggestions or a new feature request, feel free to get in touch with us via the contact form on [our website here](https://omukiguy.com/) or the [GitHub Repo](https://github.com/bahiirwa/woo-bulk-sms-manager)
+If you have suggestions or a new feature request, feel free to get in touch with us via the contact form on [our website here](https://omukiguy.com/) or the [GitHub Repo](https://github.com/bahiirwa/woocommerce-sms-order-tracking)
 
 = Contribute =
-To contribute to this plugin feel free to fork it on our [GitHub Repo]( https://github.com/bahiirwa/woo-bulk-sms-manager) and send a Pull request.
+To contribute to this plugin feel free to fork it on our [GitHub Repo]( https://github.com/bahiirwa/woocommerce-sms-order-tracking) and send a Pull request.
 
 
 == Installation ==
@@ -56,9 +58,8 @@ To contribute to this plugin feel free to fork it on our [GitHub Repo]( https://
 5. 	Open the settings page for WooCommerce and click the "SMS Details" tab.
 6.	Configure your "WooCommerce SMS Notifications" settings. See below for details.
 
-
 = Setup and configuration =
-To configure the plugin, go to __WooCommerce > Settings__ from the left hand menu, then click "Cashleo SMS" from the top tab to configure SMS settings.
+To configure the plugin, go to __Order SMS__ from the left hand menu to configure SMS settings.
 
 __*API Credentials*__
 
