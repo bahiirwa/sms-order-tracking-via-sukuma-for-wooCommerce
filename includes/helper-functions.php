@@ -15,15 +15,15 @@ function sukuma_send_sms_data( string $send_to_sms_number = 'NULL', string $send
 	$msgdata = array(
 		'method' => 'SendSms',
 		'userdata' => array(
-			'username' => WBSM_USERNAME,
-			'password' => WBSM_PASSWORD,
+			'username' => SOTVSW_USERNAME,
+			'password' => SOTVSW_PASSWORD,
 		),
 		'msgdata' => array(
 			array(
 				'number' => $send_to_sms_number,
 				'message' => $send_message,
 				'senderid' => $sender_id,
-			)
+			),
 		)
 	);
 	
@@ -31,7 +31,7 @@ function sukuma_send_sms_data( string $send_to_sms_number = 'NULL', string $send
 
 	$arguments = array(
 		'method' => 'POST',
-		'body' => json_encode( $msgdata ),
+		'body'   => json_encode( $msgdata ),
 	);
 
 	$response = wp_remote_post( $url, $arguments );
@@ -57,24 +57,26 @@ function store_inside_sms_cpt( $data_to_send_api, $response, $status ) {
 	$results = json_decode( $response );
 
 	$cost = $results->Cost;
+
 	if ( ( NULL !== $cost ) || ! empty ( $cost ) ) {
 		 $results->Cost;
 	} else {
 		$cost = 0;
 	}
+	
 	// Create post object
 	$sms_response_post = array(
-	'post_title'    => wp_strip_all_tags( $data_to_send_api['msgdata'][0]['senderid'] . ' - ' . $data_to_send_api['msgdata'][0]['number'] ),
-	'post_type'     => 'sms',
-	'post_status'   => 'publish',
-	'meta_input'    => array(
-    'sender_id_field_meta_key'      => $data_to_send_api['msgdata'][0]['senderid'],
-    'sender_numbers_field_meta_key' => $data_to_send_api['msgdata'][0]['number'],
-    'sender_msg_field_meta_key'     => $data_to_send_api['msgdata'][0]['message'],
-    'sms_sent_status_meta_key'      => $results->Status . (isset($results->Message) ?  ' - ' . $results->Message : ''),
-    'sms_cost_meta_key'             => $cost,
-	),
-  );
+		'post_title'    => wp_strip_all_tags( $data_to_send_api['msgdata'][0]['senderid'] . ' - ' . $data_to_send_api['msgdata'][0]['number'] ),
+		'post_type'     => 'sms',
+		'post_status'   => 'publish',
+		'meta_input'    => array(
+			'sender_id_field_meta_key'      => $data_to_send_api['msgdata'][0]['senderid'],
+			'sender_numbers_field_meta_key' => $data_to_send_api['msgdata'][0]['number'],
+			'sender_msg_field_meta_key'     => $data_to_send_api['msgdata'][0]['message'],
+			'sms_sent_status_meta_key'      => $results->Status . (isset($results->Message) ?  ' - ' . $results->Message : ''),
+			'sms_cost_meta_key'             => $cost,
+		),
+	);
    
   // Insert the post into the database
   wp_insert_post( $sms_response_post );
@@ -88,13 +90,13 @@ function get_account_balance() {
 	// $sms_balance = 0;
 	$tpress_account_balance = get_option( 'tpress_account_balance' );
 
-    $args = array(
-        'method' => 'Balance',
-        'userdata' => array(
-            'username' => WBSM_USERNAME,
-            'password' => WBSM_PASSWORD,
-        )
-    );
+	$args = array(
+		'method' => 'Balance',
+		'userdata' => array(
+			'username' => SOTVSW_USERNAME,
+			'password' => SOTVSW_PASSWORD,
+		)
+	);
 
 	$url = 'http://sms.sukumasms.com/api/v1/json/';
 	
@@ -145,11 +147,11 @@ function qualify_phone_number( $phone ) {
 		$phone = preg_replace( '/[^0-9]/', '', $phone );
 
 		// Check that is is 12 characters 
-			// if more return
-			// if less 
-				// Check for first 256 
-					// existing return
-					// else add missing return $phone
+		// if more return
+		// if less 
+		// Check for first 256 
+		// existing return
+		// else add missing return $phone
 		return $phone;
 	}
 }

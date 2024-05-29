@@ -6,13 +6,13 @@
  */
 
 // When order sending turned on.
-if ( '1' === WBSM_WOO_NOTIFICATIONS ) {
+if ( '1' === SOTVSW_WOO_NOTIFICATIONS ) {
 	// When Plugins loaded.
 	add_action( 'woocommerce_order_status_changed', 'send_sms_onchange_order', 10, 4 );
 }
 
 // When Notes sending turned on.
-if ( '1' === WBSM_WOO_NOTES_SMS ) {
+if ( '1' === SOTVSW_WOO_NOTES_SMS ) {
 	add_action( 'woocommerce_new_customer_note_notification', 'send_sms_on_new_order_note', 10 );
 }
 

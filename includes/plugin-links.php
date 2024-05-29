@@ -2,7 +2,7 @@
 /**
  * Add plugin action links.
  *
- * @package SukumaWooTracking
+ * @package SMSOrderTrackingViaSukumaforWoocommerce
  */
 
 /**
@@ -15,12 +15,12 @@
  * @param  array $links List of existing plugin action links.
  * @return array         List of modified plugin action links.
  */
-function wbsm_plugin_action_links( $links ) {
+function sotvsw_plugin_action_links( $links ) {
 
 	$links = array_merge(
 		array(
-			'<a href="' . esc_url( admin_url( 'admin.php?page=wbsm_theme_menu' ) ) . '">' . __( 'Settings', 'wbsm-sms-manager' ) . '</a>',
-			'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=cashleo_sms' ) ) . '">' . __( 'WooCommerce Settings', 'wbsm-sms-manager' ) . '</a>',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=SOTVSW_theme_menu' ) ) . '">' . __( 'Settings', 'sms-order-tracking-via-sukuma-for-woocommerce' ) . '</a>',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=cashleo_sms' ) ) . '">' . __( 'WooCommerce Settings', 'sms-order-tracking-via-sukuma-for-woocommerce' ) . '</a>',
 		),
 		$links
 	);
@@ -29,4 +29,4 @@ function wbsm_plugin_action_links( $links ) {
 
 }
 
-add_action( 'plugin_action_links_' . WBSM_SMS_BASENAME, 'wbsm_plugin_action_links' );
+add_action( 'plugin_action_links_' . SOTVSW_SMS_BASENAME, 'sotvsw_plugin_action_links' );

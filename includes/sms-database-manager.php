@@ -2,7 +2,7 @@
 /**
  * This is the database manager file. Involves creating and updating the database table.
  *
- * @package SukumaWooTracking
+ * @package SMSOrderTrackingViaSukumaforWoocommerce
  */
 
 global $wsmot_db_version;

@@ -1,4 +1,4 @@
-=== Sukuma Woocommerce SMS Order Tracking ===
+=== SMS Order Tracking via Sukuma for WooCommerce ===
 Contributors: laurencebahiirwa
 Donate link: https://omukiguy.com/donate
 Tags: woocommerce, sms, notifications, order, notes
@@ -35,7 +35,6 @@ SMS messages can only be sent to Ugandan mobile numbers ( mtn & airtel )
 *   __Send SMS order notifications__ to store admin when an order is made
 * 	__Send SMS order notifications__ to customers once their order status changes
 * 	__Send SMS__ to the customer from the order details page
-
 
 = Suggestions / Feature Request =
 
@@ -98,15 +97,13 @@ This allow you to send a Test SMS.
 
 * Click on __Save Changes__ for the changes you made to be effected.
 
-
 == Frequently Asked Questions ==
 
 = What Do I Need To Use The Plugin =
 
 1.	You need to have Woocommerce plugin installed and activated on your WordPress site
-2.	You need to open an account on [Jusibe](https://jusibe.com)
-3.	You need to have SMS credits in your [Jusibe](https://jusibe.com) account
-
+2.	You need to open an account on [Sukumasms](https://sukumasms.com)
+3.	You need to have SMS credits in your [Sukumasms](https://sukumasms.com) account
 
 == Changelog ==
 
@@ -116,7 +113,6 @@ This allow you to send a Test SMS.
 == Upgrade Notice ==
 
 = 0.1.0 =
-
 
 == Screenshots ==
 
